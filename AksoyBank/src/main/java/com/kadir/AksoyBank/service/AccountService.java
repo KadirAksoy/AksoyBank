@@ -1,7 +1,6 @@
 package com.kadir.AksoyBank.service;
 
 import com.kadir.AksoyBank.dto.AccountDto;
-import com.kadir.AksoyBank.dto.CustomerDto;
 import com.kadir.AksoyBank.dto.convert.AccountDtoConverter;
 import com.kadir.AksoyBank.exception.CustomerNotFoundException;
 import com.kadir.AksoyBank.model.Account;
@@ -29,8 +28,7 @@ public class AccountService {
     }
 
     public AccountDto createAccount(AccountDto accountDto){
-
-        Customer customer = customerService.getCustomerById(accountDto.getId());
+        Customer customer = customerService.getCustomerById(accountDto.getCustomerId());
 
         if (customer.getId() == null){
             throw new CustomerNotFoundException("Customer not found");
@@ -43,7 +41,7 @@ public class AccountService {
 
         accountRepository.save(account);
 
-        return accountDtoConverter.convert(account);
+        return accountDtoConverter.convert(accountRepository.save(account));
     }
     public AccountDto updateAccount(String id , AccountDto accountDto){
         Customer customer = customerService.getCustomerById(accountDto.getCustomerId());

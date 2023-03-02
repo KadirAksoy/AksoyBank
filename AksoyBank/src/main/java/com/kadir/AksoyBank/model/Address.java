@@ -27,10 +27,8 @@ public class Address {
     @Column(name = "address_id", updatable = false, nullable = false)
     private String id;
     @Column(name = "city")
-    @NotNull
     private String city;
     @Column(name = "street")
-    @NotNull
     private String street;
 
 
